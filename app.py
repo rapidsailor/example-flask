@@ -1,13 +1,16 @@
+from flask import Flask
 from telegram.ext.updater import Updater
 from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
 from telegram.ext.commandhandler import CommandHandler
 from telegram.ext.messagehandler import MessageHandler
 from telegram.ext.filters import Filters
-  
-updater = Updater("5918802730:AAHwItu0_DArr12fAhYK58nXit2eW1wcKww", use_context=True)
-  
-  
+
+app = Flask(__name__)
+
+updater = Updater("5918802730:AAHwItu0_DArr12fAhYK58nXit2eW1wcKww",
+                  use_context=True)
+				  
 def start(update: Update, context: CallbackContext):
     update.message.reply_text(
         "Hello sir, Welcome to the Bot.Please write\
@@ -67,3 +70,12 @@ updater.dispatcher.add_handler(MessageHandler(
 updater.dispatcher.add_handler(MessageHandler(Filters.text, unknown_text))
   
 updater.start_polling()
+
+@app.route("/", methods=['GET'])
+def home():
+	updater.dispatcher.add_handler(CommandHandler('youtube', youtube_url))
+    return 'reply from koyeb'
+
+
+if __name__ == "__main__":
+    app.run()
