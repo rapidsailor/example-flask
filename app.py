@@ -1,4 +1,5 @@
 from flask import Flask
+from telegram.ext import updater
 from telegram.ext.updater import Updater
 from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
@@ -6,6 +7,7 @@ from telegram.ext.commandhandler import CommandHandler
 from telegram.ext.messagehandler import MessageHandler
 from telegram.ext.filters import Filters
 
+updater = Updater("5918802730:AAHwItu0_DArr12fAhYK58nXit2eW1wcKww", use_context=True)
 
 app = Flask(__name__)
 
